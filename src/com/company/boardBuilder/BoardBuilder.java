@@ -3,20 +3,20 @@ package com.company.boardBuilder;
 import com.company.board.ChessBoard;
 import com.company.board.Field;
 import com.company.figure.ChessFigure;
+import com.company.figure.Side;
 
 import java.util.HashMap;
-import java.util.Map;
 
-public class BoardBuilder {
-    private String firstSide;
-    private String secondSide;
+public class BoardBuilder implements Builder{
+    private Side firstSide;
+    private Side secondSide;
     private HashMap<Field, ChessFigure> pawnMap;
 
-    public String getFirstSide() {
+    public Side getFirstSide() {
         return firstSide;
     }
 
-    public String getSecondSide() {
+    public Side getSecondSide() {
         return secondSide;
     }
 
@@ -24,13 +24,15 @@ public class BoardBuilder {
         return pawnMap;
     }
 
-    public BoardBuilder setFirstSide(String firstSide){
-        this.firstSide = firstSide;
+    public BoardBuilder setFirstSideWHITE(){
+        this.firstSide = Side.WHITE;
+        this.secondSide = Side.BLACK;
         return this;
     }
 
-    public BoardBuilder setSecondSide(String secondSide){
-        this.secondSide = secondSide;
+    public BoardBuilder setFirstSideBLACK(){
+        this.firstSide = Side.BLACK;
+        this.secondSide = Side.WHITE;
         return this;
     }
 

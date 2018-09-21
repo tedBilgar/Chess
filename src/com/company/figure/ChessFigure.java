@@ -4,14 +4,12 @@ import com.company.board.ChessBoard;
 import com.company.board.Field;
 
 public abstract class ChessFigure {
-    protected boolean isActive;
-    protected String side;
+    protected Side side;
     protected ChessBoard chessBoard;
     protected Field location;
     protected ChessType chessType;
 
-    public ChessFigure(String side, ChessBoard chessBoard, Field location) {
-        this.isActive = true;
+    public ChessFigure(Side side, ChessBoard chessBoard, Field location) {
         this.side = side;
         this.chessBoard = chessBoard;
         this.location = location;
