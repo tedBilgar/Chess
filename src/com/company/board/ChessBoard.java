@@ -2,8 +2,7 @@ package com.company.board;
 
 import com.company.boardBuilder.BoardBuilder;
 import com.company.figure.ChessFigure;
-import com.company.figure.Pawn;
-import com.company.figure.Side;
+import com.company.types.Side;
 
 import java.util.HashMap;
 import java.util.Map;

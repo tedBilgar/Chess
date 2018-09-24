@@ -3,7 +3,7 @@ package com.company.boardBuilder;
 import com.company.board.ChessBoard;
 import com.company.board.Field;
 import com.company.figure.ChessFigure;
-import com.company.figure.Side;
+import com.company.types.Side;
 
 import java.util.HashMap;
 

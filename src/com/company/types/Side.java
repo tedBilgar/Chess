@@ -1,4 +1,4 @@
-package com.company.figure;
+package com.company.types;
 
 public enum Side {
     BLACK,
