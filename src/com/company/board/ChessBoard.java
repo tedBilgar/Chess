@@ -50,7 +50,17 @@ public class ChessBoard {
         return null;
     }
 
-    public Field getCoordByFigure(ChessFigure chessFigure){
+    public Field getFieldByCoord(int x, int y){
+        for(Map.Entry<Field,ChessFigure> entry: pawnMap.entrySet()){
+            if (entry.getKey().getX_coord() == x && entry.getKey().getY_coord() == y){
+                return entry.getKey();
+            }
+        }
+
+        return null;
+    }
+
+    public Field getFieldByFigure(ChessFigure chessFigure){
         for(Map.Entry<Field,ChessFigure> entry: pawnMap.entrySet()){
             if (entry.getValue() == chessFigure) return entry.getKey();
         }
