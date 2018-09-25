@@ -5,21 +5,14 @@ import com.company.board.Field;
 import com.company.types.ChessType;
 import com.company.types.Side;
 
+import java.util.List;
+import java.util.Random;
+
 public abstract class ChessFigure {
     protected Side side;
     protected ChessBoard chessBoard;
     protected Field location;
-
-    protected int minStep;
-    protected int maxStep;
-    protected int upperLeft;
-    protected int upperCenter;
-    protected int upperRight;
-    protected int currentLeft;
-    protected int currentRight;
-    protected int bottomLeft;
-    protected int bottomCenter;
-    protected int bottonRight;
+    protected int vectorNum;
 
     public ChessFigure(Side side, ChessBoard chessBoard, Field location) {
         this.side = side;
@@ -27,4 +20,22 @@ public abstract class ChessFigure {
         this.location = location;
     }
     abstract int move();
+
+    public void kill(int x_coord,int y_coord){
+        chessBoard.getPawnMap().put(chessBoard.getFieldByCoord(x_coord, y_coord),this);
+    }
+
+    public int getRandom(int firstBorder, int secondBorder, List<Integer> exceptionVectorList){
+        boolean itWas = false;
+        Random random = new Random();
+        int randomVector;
+        do {
+            randomVector = random.nextInt(secondBorder) + firstBorder;
+            for (int a : exceptionVectorList) {
+                if (randomVector == a) itWas = true;
+            }
+        } while (itWas);
+
+        return randomVector;
+    }
 }
