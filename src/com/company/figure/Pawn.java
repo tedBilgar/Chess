@@ -40,6 +40,7 @@ public class Pawn extends ChessFigure {
         }
 
 
+
         return 0;
     }
 
