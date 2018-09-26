@@ -23,7 +23,7 @@ public abstract class ChessFigure {
     }
     abstract boolean move();
     abstract void setStep();
-    abstract void setRandomVector(int... previousVectors);
+    abstract boolean setRandomVector(List<Integer> usedVectors);
 
     public int getStep(){
         return step;

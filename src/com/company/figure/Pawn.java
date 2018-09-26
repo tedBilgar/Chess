@@ -20,14 +20,13 @@ public class Pawn extends ChessFigure {
     public boolean move() {
         int coeff;
         boolean isDone  = false;
-        int attempt = 0;
-        int[][] usedVectors = new int[3][2];
+        List<Integer> usedVectors = new ArrayList<>();
         if (side == Side.WHITE) coeff = +1;
         else coeff = -1;
 
         do {
             setStep();
-            setRandomVector();
+            if(!setRandomVector(usedVectors)) break;
 
             if (getVector()[0] == -1 && getVector()[1] == +1 || getVector()[0] == +1 && getVector()[1] == +1) {
                 ChessFigure anotherFigure = chessBoard.getFigureByCoord(location.getX_coord() + (coeff) * getVector()[0] * step,
@@ -36,9 +35,7 @@ public class Pawn extends ChessFigure {
                     killOther(anotherFigure.getLocation());
                     isDone = true;
                 }else {
-                    usedVectors[attempt][0] = getVector()[0];
-                    usedVectors[attempt][1] = getVector()[1];
-                    attempt++;
+                    isDone = false;
                 }
             } else {
                 ChessFigure anotherFigure = chessBoard.getFigureByCoord(location.getX_coord() + (coeff) * getVector()[0] * step,
@@ -46,16 +43,16 @@ public class Pawn extends ChessFigure {
                 if (anotherFigure == null) {
                     Field newField = chessBoard.getFieldByCoord(location.getX_coord() + (coeff) * getVector()[0] * step, location.getY_coord() + (coeff) * getVector()[1] * step);
                     chessBoard.getPawnMap().put(newField, this);
+                    isDone = true;
                 }else{
-                    usedVectors[attempt][0] = getVector()[0];
-                    usedVectors[attempt][1] = getVector()[1];
-                    attempt++;
+
+                    isDone = false;
                 }
             }
 
         }while (!isDone);
 
-      return false;
+      return isDone;
     }
 
     @Override
@@ -64,30 +61,36 @@ public class Pawn extends ChessFigure {
     }
 
     @Override
-    void setRandomVector(int[][] usedVectors) {
+    boolean setRandomVector(List<Integer> usedVectors) {
         boolean isNext = false;
         Random random = new Random();
         int randomNum;
+        if (usedVectors.size() == 3) return false;
         do {
             randomNum = random.nextInt(3) + 1;
-            for (int[] num : usedVectors) {
-
+            for (int num: usedVectors) {
+                if(randomNum == num) isNext = false;
+                else isNext = true;
             }
-        }while(isNext);
+        }while(!isNext);
 
         if(randomNum == 1) {
             vector[0] = -1;
             vector[1] = +1;
+            usedVectors.add(1);
         }
         if(randomNum == 2){
             vector[0] = 0;
             vector[1] = +1;
+            usedVectors.add(2);
         }
         if(randomNum == 3){
             vector[0] = +1;
             vector[1] = +1;
+            usedVectors.add(3);
         }
 
+        return true;
     }
 
 }
