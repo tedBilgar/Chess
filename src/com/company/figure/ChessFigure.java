@@ -21,9 +21,9 @@ public abstract class ChessFigure {
         this.chessBoard = chessBoard;
         this.location = location;
     }
-    abstract int move();
+    abstract boolean move();
     abstract void setStep();
-    abstract void setRandomVector();
+    abstract void setRandomVector(int... previousVectors);
 
     public int getStep(){
         return step;

@@ -11,7 +11,19 @@ public class Elephant extends ChessFigure {
     }
 
     @Override
-    int move() {
-        return 0;
+    boolean move() {
+        return false;
     }
+
+    @Override
+    void setStep() {
+
+    }
+
+    @Override
+    void setRandomVector() {
+
+    }
+
+
 }
