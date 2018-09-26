@@ -12,33 +12,60 @@ import java.util.Random;
 public class Pawn extends ChessFigure {
     public Pawn(Side side, ChessBoard chessBoard, Field location) {
         super(side,chessBoard,location);
-        vectorNum = 3;
+        vector = new int[2];
     }
 
 
     @Override
     public int move() {
-        boolean isChanged = false;
-        List<Integer> exceptionVectorList = new ArrayList<>();
+        int coeff;
+        if (side == Side.WHITE) coeff = +1;
+        else coeff = -1;
 
-        do {
-            int randomVector = getRandom(1, vectorNum, exceptionVectorList);
-            if (randomVector == 1) {
-                if (chessBoard.getFigureByCoord(location.getX_coord(), location.getY_coord() + 1) == null) {
-                    location.setY_coord(location.getY_coord() + 1);
-                    chessBoard.getPawnMap().put(chessBoard.getFieldByCoord(location.getX_coord(), location.getY_coord()), this);
-                    isChanged = true;
-                }else exceptionVectorList.add(1);
+        setStep();
+        setRandomVector();
+
+        if (getVector()[0] == -1 && getVector()[1] == +1 || getVector()[0] == +1 && getVector()[1] == +1){
+            ChessFigure anotherFigure = chessBoard.getFigureByCoord(location.getX_coord() + (coeff)*getVector()[0]*step,
+                    location.getY_coord() + (coeff)*getVector()[1]*step);
+            if(anotherFigure != null && anotherFigure.side != this.side){
+                killOther(anotherFigure.getLocation());
             }
-
-            if(randomVector == 2){
-
+        }else {
+            ChessFigure anotherFigure = chessBoard.getFigureByCoord(location.getX_coord() + (coeff)*getVector()[0]*step,
+                    location.getY_coord() + (coeff)*getVector()[1]*step);
+            if(anotherFigure == null){
+                Field newField = chessBoard.getFieldByCoord(location.getX_coord() + (coeff)*getVector()[0]*step, location.getY_coord() + (coeff)*getVector()[1]*step);
+                chessBoard.getPawnMap().put(newField,this);
             }
+        }
 
-        } while(isChanged);
+      return 0;
+    }
 
+    @Override
+    void setStep() {
+        this.step = 1;
+    }
 
-        return 0;
+    @Override
+    void setRandomVector() {
+        Random random = new Random();
+        int randomNum = random.nextInt(3) + 1;
+
+        if(randomNum == 1) {
+            vector[0] = -1;
+            vector[1] = +1;
+        }
+        if(randomNum == 2){
+            vector[0] = 0;
+            vector[1] = +1;
+        }
+        if(randomNum == 3){
+            vector[0] = +1;
+            vector[1] = +1;
+        }
+
     }
 
 }

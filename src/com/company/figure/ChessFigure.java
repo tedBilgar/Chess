@@ -12,7 +12,9 @@ public abstract class ChessFigure {
     protected Side side;
     protected ChessBoard chessBoard;
     protected Field location;
-    protected int vectorNum;
+
+    protected int[] vector;
+    protected int step;
 
     public ChessFigure(Side side, ChessBoard chessBoard, Field location) {
         this.side = side;
@@ -20,9 +22,23 @@ public abstract class ChessFigure {
         this.location = location;
     }
     abstract int move();
+    abstract void setStep();
+    abstract void setRandomVector();
 
-    public void kill(int x_coord,int y_coord){
-        chessBoard.getPawnMap().put(chessBoard.getFieldByCoord(x_coord, y_coord),this);
+    public int getStep(){
+        return step;
+    }
+    public int[] getVector(){
+        return vector;
+    }
+    public Field getLocation(){
+        return location;
+    }
+
+    public void killOther(Field otherField){
+        chessBoard.getPawnMap().put(chessBoard.getFieldByCoord(location.getX_coord(),location.getY_coord()),null);
+        location = otherField;
+        chessBoard.getPawnMap().put(location,this);
     }
 
     public int getRandom(int firstBorder, int secondBorder, List<Integer> exceptionVectorList){
@@ -38,4 +54,5 @@ public abstract class ChessFigure {
 
         return randomVector;
     }
+
 }
