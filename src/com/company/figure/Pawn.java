@@ -25,13 +25,16 @@ public class Pawn extends ChessFigure {
         else coeff = -1;
 
         do {
-            setStep();
+            setStep(1,1);
             if(!setRandomVector(usedVectors)) break;
 
             if (getVector()[0] == -1 && getVector()[1] == +1 || getVector()[0] == +1 && getVector()[1] == +1) {
                 ChessFigure anotherFigure = chessBoard.getFigureByCoord(location.getX_coord() + (coeff) * getVector()[0] * step,
                         location.getY_coord() + (coeff) * getVector()[1] * step);
-                if (anotherFigure != null && anotherFigure.side != this.side) {
+                if (anotherFigure != null && anotherFigure.side != this.side && location.getX_coord() + (coeff) * getVector()[0] * step < 8
+                    && location.getX_coord() + (coeff) * getVector()[0] * step > -1
+                    && location.getY_coord() + (coeff) * getVector()[1] * step < 8
+                    && location.getY_coord() + (coeff) * getVector()[1] * step > -1 ) {
                     killOther(anotherFigure.getLocation());
                     isDone = true;
                 }else {
@@ -40,7 +43,10 @@ public class Pawn extends ChessFigure {
             } else {
                 ChessFigure anotherFigure = chessBoard.getFigureByCoord(location.getX_coord() + (coeff) * getVector()[0] * step,
                         location.getY_coord() + (coeff) * getVector()[1] * step);
-                if (anotherFigure == null) {
+                if (anotherFigure == null && location.getX_coord() + (coeff) * getVector()[0] * step < 8
+                        && location.getX_coord() + (coeff) * getVector()[0] * step > -1
+                        && location.getY_coord() + (coeff) * getVector()[1] * step < 8
+                        && location.getY_coord() + (coeff) * getVector()[1] * step > -1 ) {
                     Field newField = chessBoard.getFieldByCoord(location.getX_coord() + (coeff) * getVector()[0] * step, location.getY_coord() + (coeff) * getVector()[1] * step);
                     chessBoard.getPawnMap().put(newField, this);
                     isDone = true;
@@ -56,8 +62,8 @@ public class Pawn extends ChessFigure {
     }
 
     @Override
-    void setStep() {
-        this.step = 1;
+    void setStep(int bottomLine,int upperLine) {
+        this.step = new Random().nextInt(bottomLine) + upperLine;
     }
 
     @Override

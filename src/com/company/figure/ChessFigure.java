@@ -22,7 +22,7 @@ public abstract class ChessFigure {
         this.location = location;
     }
     abstract boolean move();
-    abstract void setStep();
+    abstract void setStep(int bottomLine,int upperLine);
     abstract boolean setRandomVector(List<Integer> usedVectors);
 
     public int getStep(){
@@ -39,20 +39,6 @@ public abstract class ChessFigure {
         chessBoard.getPawnMap().put(chessBoard.getFieldByCoord(location.getX_coord(),location.getY_coord()),null);
         location = otherField;
         chessBoard.getPawnMap().put(location,this);
-    }
-
-    public int getRandom(int firstBorder, int secondBorder, List<Integer> exceptionVectorList){
-        boolean itWas = false;
-        Random random = new Random();
-        int randomVector;
-        do {
-            randomVector = random.nextInt(secondBorder) + firstBorder;
-            for (int a : exceptionVectorList) {
-                if (randomVector == a) itWas = true;
-            }
-        } while (itWas);
-
-        return randomVector;
     }
 
 }
