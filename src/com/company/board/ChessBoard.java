@@ -5,18 +5,17 @@ import com.company.figure.ChessFigure;
 import com.company.types.Side;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ChessBoard {
     private Side firstSide;
     private Side secondSide;
-    private HashMap<Field, ChessFigure> pawnMap;
-
+    private List<ChessFigure> pawnList;
 
     public ChessBoard(BoardBuilder boardBuilder) {
         this.firstSide = boardBuilder.getFirstSide();
         this.secondSide = boardBuilder.getSecondSide();
-        this.pawnMap = boardBuilder.getPawnMap();
     }
 
 
@@ -36,16 +35,11 @@ public class ChessBoard {
         this.secondSide = secondSide;
     }
 
-    public Map<Field, ChessFigure> getPawnMap() {
-        return pawnMap;
-    }
 
 
     public ChessFigure getFigureByCoord(int x,int y){
-        for(Map.Entry<Field,ChessFigure> entry: pawnMap.entrySet()) {
-            if (entry.getKey().getX_coord() == x && entry.getKey().getY_coord() == y){
-                return entry.getValue();
-            }
+        for (ChessFigure figure : pawnList) {
+            if (figure.getX_coord() == x && figure.getY_coord() == y) return figure;
         }
         return null;
     }

@@ -6,11 +6,12 @@ import com.company.figure.ChessFigure;
 import com.company.types.Side;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class BoardBuilder implements Builder{
     private Side firstSide;
     private Side secondSide;
-    private HashMap<Field, ChessFigure> pawnMap;
+    private List<ChessFigure> pawnList;
 
     public Side getFirstSide() {
         return firstSide;
@@ -20,8 +21,8 @@ public class BoardBuilder implements Builder{
         return secondSide;
     }
 
-    public HashMap<Field, ChessFigure> getPawnMap() {
-        return pawnMap;
+    public List<ChessFigure> getPawnList() {
+        return pawnList;
     }
 
     public BoardBuilder setFirstSideWHITE(){
@@ -37,12 +38,7 @@ public class BoardBuilder implements Builder{
     }
 
     public BoardBuilder setPawnMap(){
-        pawnMap = new HashMap<>();
-        for(int i = 0; i<8;i++){
-            for (int j = 0; j<8;j++){
-                pawnMap.put(new Field(i,j),null);
-            }
-        }
+        //TODO
         return this;
     }
     public ChessBoard build(){

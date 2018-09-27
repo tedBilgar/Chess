@@ -11,28 +11,50 @@ import java.util.Random;
 public abstract class ChessFigure {
     protected Side side;
     protected ChessBoard chessBoard;
-    protected Field location;
+    protected int x_coord;
+    protected int y_coord;
 
     protected int[] vector;
     protected int step;
 
-    public ChessFigure(Side side, ChessBoard chessBoard, Field location) {
+    public ChessFigure(Side side, ChessBoard chessBoard) {
         this.side = side;
         this.chessBoard = chessBoard;
-        this.location = location;
     }
     abstract boolean move();
     abstract void setStep(int bottomLine,int upperLine);
     abstract boolean setRandomVector(List<Integer> usedVectors);
 
-    public int getStep(){
-        return step;
+    public Side getSide() {
+        return side;
     }
-    public int[] getVector(){
-        return vector;
+
+    public void setSide(Side side) {
+        this.side = side;
     }
-    public Field getLocation(){
-        return location;
+
+    public ChessBoard getChessBoard() {
+        return chessBoard;
+    }
+
+    public void setChessBoard(ChessBoard chessBoard) {
+        this.chessBoard = chessBoard;
+    }
+
+    public int getX_coord() {
+        return x_coord;
+    }
+
+    public void setX_coord(int x_coord) {
+        this.x_coord = x_coord;
+    }
+
+    public int getY_coord() {
+        return y_coord;
+    }
+
+    public void setY_coord(int y_coord) {
+        this.y_coord = y_coord;
     }
 
     public void killOther(Field otherField){
