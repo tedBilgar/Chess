@@ -37,7 +37,7 @@ public class BoardBuilder implements Builder{
         return this;
     }
 
-    public BoardBuilder setPawnMap(){
+    public BoardBuilder setPawnList(){
         //TODO
         return this;
     }

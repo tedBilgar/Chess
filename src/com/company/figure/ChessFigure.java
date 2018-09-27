@@ -17,12 +17,14 @@ public abstract class ChessFigure {
     protected int[] vector;
     protected int step;
 
-    public ChessFigure(Side side, ChessBoard chessBoard) {
+    public ChessFigure(Side side, ChessBoard chessBoard,int x_coord,int y_coord) {
         this.side = side;
         this.chessBoard = chessBoard;
+        this.x_coord = x_coord;
+        this.y_coord = y_coord;
     }
     abstract boolean move();
-    abstract void setStep(int bottomLine,int upperLine);
+    abstract void setStep();
     abstract boolean setRandomVector(List<Integer> usedVectors);
 
     public Side getSide() {

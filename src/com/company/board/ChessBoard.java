@@ -16,6 +16,7 @@ public class ChessBoard {
     public ChessBoard(BoardBuilder boardBuilder) {
         this.firstSide = boardBuilder.getFirstSide();
         this.secondSide = boardBuilder.getSecondSide();
+        this.pawnList = boardBuilder.getPawnList();
     }
 
 
@@ -35,28 +36,13 @@ public class ChessBoard {
         this.secondSide = secondSide;
     }
 
+    public List<ChessFigure> getPawnList() {
+        return pawnList;
+    }
 
-
-    public ChessFigure getFigureByCoord(int x,int y){
+    public ChessFigure getFigureByCoord(int x, int y){
         for (ChessFigure figure : pawnList) {
             if (figure.getX_coord() == x && figure.getY_coord() == y) return figure;
-        }
-        return null;
-    }
-
-    public Field getFieldByCoord(int x, int y){
-        for(Map.Entry<Field,ChessFigure> entry: pawnMap.entrySet()){
-            if (entry.getKey().getX_coord() == x && entry.getKey().getY_coord() == y){
-                return entry.getKey();
-            }
-        }
-
-        return null;
-    }
-
-    public Field getFieldByFigure(ChessFigure chessFigure){
-        for(Map.Entry<Field,ChessFigure> entry: pawnMap.entrySet()){
-            if (entry.getValue() == chessFigure) return entry.getKey();
         }
         return null;
     }
