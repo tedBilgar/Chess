@@ -14,5 +14,6 @@ public class Main {
         ChessBoard chessBoard = Director.createBoard();
         System.out.println(new Random().nextInt(1) + 1);
         //new branch
+        // alter branch
     }
 }
