@@ -1,7 +1,6 @@
 package com.company.figure;
 
 import com.company.board.ChessBoard;
-import com.company.board.Field;
 import com.company.types.Side;
 
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ public class Queen extends ChessFigure {
     }
 
     @Override
-    boolean move() {
+    public boolean move() {
         int coeff;
         boolean isDone  = false;
         List<Integer> usedVectors = new ArrayList<>();
@@ -32,7 +31,7 @@ public class Queen extends ChessFigure {
         int potentialYCoord = y_coord + coeff * vector[1] * step;
         ChessFigure potentialKilled = null;
 
-        for (ChessFigure figure: chessBoard.getPawnList()) {
+        for (ChessFigure figure: chessBoard.getChessFigures()) {
             int differenceX = figure.getX_coord() - x_coord;
             int differenceY = figure.getY_coord() - y_coord;
 
@@ -59,13 +58,13 @@ public class Queen extends ChessFigure {
         x_coord = potentialXCoord;
         y_coord = potentialYCoord;
         if(potentialKilled != null) {
-            chessBoard.getPawnList().remove(potentialKilled);
+            chessBoard.getChessFigures().remove(potentialKilled);
         }
         return true;
     }
 
     @Override
-    void setStep() {
+    public void setStep() {
         int coeff;
         boolean isDone = false;
         int randomStep;
@@ -84,7 +83,7 @@ public class Queen extends ChessFigure {
     }
 
     @Override
-    boolean setRandomVector(List<Integer> usedVectors) {
+    public boolean setRandomVector(List<Integer> usedVectors) {
         boolean isNext = false;
         Random random = new Random();
         int randomNum;

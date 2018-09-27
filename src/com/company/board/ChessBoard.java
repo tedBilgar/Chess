@@ -9,39 +9,18 @@ import java.util.List;
 import java.util.Map;
 
 public class ChessBoard {
-    private Side firstSide;
-    private Side secondSide;
-    private List<ChessFigure> pawnList;
+    private List<ChessFigure> chessFigures;
 
     public ChessBoard(BoardBuilder boardBuilder) {
-        this.firstSide = boardBuilder.getFirstSide();
-        this.secondSide = boardBuilder.getSecondSide();
-        this.pawnList = boardBuilder.getPawnList();
+        this.chessFigures = boardBuilder.getChessFigures();
     }
 
-
-    public Side getFirstSide() {
-        return firstSide;
-    }
-
-    public void setFirstSide(Side firstSide) {
-        this.firstSide = firstSide;
-    }
-
-    public Side getSecondSide() {
-        return secondSide;
-    }
-
-    public void setSecondSide(Side secondSide) {
-        this.secondSide = secondSide;
-    }
-
-    public List<ChessFigure> getPawnList() {
-        return pawnList;
+    public List<ChessFigure> getChessFigures() {
+        return chessFigures;
     }
 
     public ChessFigure getFigureByCoord(int x, int y){
-        for (ChessFigure figure : pawnList) {
+        for (ChessFigure figure : chessFigures) {
             if (figure.getX_coord() == x && figure.getY_coord() == y) return figure;
         }
         return null;

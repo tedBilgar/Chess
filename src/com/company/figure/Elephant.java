@@ -1,7 +1,6 @@
 package com.company.figure;
 
 import com.company.board.ChessBoard;
-import com.company.board.Field;
 import com.company.types.Side;
 
 import java.util.ArrayList;
@@ -13,6 +12,7 @@ public class Elephant extends ChessFigure {
 
     public Elephant(Side side, ChessBoard chessBoard, int x_coord, int y_coord) {
         super(side, chessBoard, x_coord, y_coord);
+        vector  = new int[2];
     }
 
     @Override
@@ -33,16 +33,18 @@ public class Elephant extends ChessFigure {
         int potentialYCoord = y_coord + coeff * vector[1] * step;
         ChessFigure potentialKilled = null;
 
-        for (ChessFigure figure: chessBoard.getPawnList()) {
+        for (ChessFigure figure: chessBoard.getChessFigures()) {
             int differenceX = figure.getX_coord() - x_coord;
             int differenceY = figure.getY_coord() - y_coord;
 
             //данная фигура на пути у текущей фигуры или нет
             if (getVectorType(differenceX,differenceY) == usedVectors.get(usedVectors.size() - 1)){
+                System.out.println("under strike");
                 if (vector[0] * potentialXCoord > vector[0] * figure.getX_coord()
                         || vector[1] * potentialYCoord > vector[1] * figure.getY_coord()){
                     if (figure.side != this.side){
                         //если вражеская фигура стоит раньше то потенциально бьет её
+                        System.out.println("бьет");
                         potentialXCoord = figure.getX_coord();
                         potentialYCoord = figure.getY_coord();
                         potentialKilled = figure;
@@ -50,6 +52,7 @@ public class Elephant extends ChessFigure {
                         //TODO until still on own place
                         //если союзная фигура стоит раньше
                         //пока что стоит на месте своем
+                        System.out.println("своя");
                         potentialXCoord = figure.getX_coord()- vector[0] * 1;
                         potentialYCoord = figure.getY_coord() - vector[1] * 1;
                     }
@@ -57,16 +60,19 @@ public class Elephant extends ChessFigure {
             }
 
         }
+        System.out.print("Elephant " + this.side + " was: "+x_coord + " " + y_coord);
         x_coord = potentialXCoord;
         y_coord = potentialYCoord;
         if(potentialKilled != null) {
-            chessBoard.getPawnList().remove(potentialKilled);
+            chessBoard.getChessFigures().remove(potentialKilled);
+            System.out.println(" and killed another ");
         }
+        System.out.println(" Now : " + x_coord + " " + y_coord);
         return true;
     }
 
     @Override
-    void setStep() {
+    public void setStep() {
         int coeff;
         boolean isDone = false;
         int randomStep;
@@ -76,7 +82,7 @@ public class Elephant extends ChessFigure {
         do {
             randomStep = random.nextInt(8) + 1;
             if (x_coord + coeff * vector[0] * randomStep > 0 && x_coord + coeff * vector[0] * randomStep < 9
-                    || y_coord + coeff * vector[1] * randomStep > 0 && y_coord + coeff * vector[1] * randomStep < 9) {
+                    && y_coord + coeff * vector[1] * randomStep > 0 && y_coord + coeff * vector[1] * randomStep < 9) {
                 isDone = true;
             }
         }while (!isDone);
@@ -85,18 +91,20 @@ public class Elephant extends ChessFigure {
     }
 
     @Override
-    boolean setRandomVector(List<Integer> usedVectors) {
+    public boolean setRandomVector(List<Integer> usedVectors) {
         boolean isNext = false;
         Random random = new Random();
         int randomNum;
         if (usedVectors.size() == 4) return false;
         do {
             randomNum = random.nextInt(4) + 1;
+            System.out.println("here");
+
             for (int num: usedVectors) {
                 if(randomNum == num) isNext = false;
                 else isNext = true;
             }
-        }while(!isNext);
+        }while(isNext);
 
         if(randomNum == 1){
             vector[0] = 0;

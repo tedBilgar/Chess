@@ -1,12 +1,9 @@
 package com.company.figure;
 
 import com.company.board.ChessBoard;
-import com.company.board.Field;
-import com.company.types.ChessType;
 import com.company.types.Side;
 
 import java.util.List;
-import java.util.Random;
 
 public abstract class ChessFigure {
     protected Side side;
@@ -23,9 +20,9 @@ public abstract class ChessFigure {
         this.x_coord = x_coord;
         this.y_coord = y_coord;
     }
-    abstract boolean move();
-    abstract void setStep();
-    abstract boolean setRandomVector(List<Integer> usedVectors);
+    abstract public boolean move();
+    abstract public void setStep();
+    abstract public boolean setRandomVector(List<Integer> usedVectors);
 
     public Side getSide() {
         return side;

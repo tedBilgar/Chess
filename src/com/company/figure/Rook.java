@@ -1,7 +1,6 @@
 package com.company.figure;
 
 import com.company.board.ChessBoard;
-import com.company.board.Field;
 import com.company.types.Side;
 
 import java.util.List;
@@ -12,17 +11,17 @@ public class Rook extends ChessFigure {
     }
 
     @Override
-    boolean move() {
+    public boolean move() {
         return false;
     }
 
     @Override
-    void setStep() {
+    public void setStep() {
 
     }
 
     @Override
-    boolean setRandomVector(List<Integer> usedVectors) {
+    public boolean setRandomVector(List<Integer> usedVectors) {
         return false;
     }
 }
