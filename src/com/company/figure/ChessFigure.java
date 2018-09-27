@@ -59,10 +59,5 @@ public abstract class ChessFigure {
         this.y_coord = y_coord;
     }
 
-    public void killOther(Field otherField){
-        chessBoard.getPawnMap().put(chessBoard.getFieldByCoord(location.getX_coord(),location.getY_coord()),null);
-        location = otherField;
-        chessBoard.getPawnMap().put(location,this);
-    }
 
 }

@@ -59,7 +59,10 @@ public class Elephant extends ChessFigure {
         }
         x_coord = potentialXCoord;
         y_coord = potentialYCoord;
-        chessBoard.getPawnList().remove(potentialKilled);
+        if(potentialKilled != null) {
+            chessBoard.getPawnList().remove(potentialKilled);
+        }
+        return true;
     }
 
     @Override

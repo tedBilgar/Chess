@@ -7,8 +7,8 @@ import com.company.types.Side;
 import java.util.List;
 
 public class Horse extends ChessFigure {
-    public Horse(Side side, ChessBoard chessBoard, Field location) {
-        super(side, chessBoard, location);
+    public Horse(Side side, ChessBoard chessBoard, int x_coord, int y_coord) {
+        super(side, chessBoard, x_coord, y_coord);
     }
 
     @Override
@@ -17,7 +17,7 @@ public class Horse extends ChessFigure {
     }
 
     @Override
-    void setStep(int bottomLine, int upperLine) {
+    void setStep() {
 
     }
 
@@ -25,6 +25,4 @@ public class Horse extends ChessFigure {
     boolean setRandomVector(List<Integer> usedVectors) {
         return false;
     }
-
-
 }
