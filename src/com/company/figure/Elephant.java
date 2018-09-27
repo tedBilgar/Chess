@@ -24,13 +24,14 @@ public class Elephant extends ChessFigure {
         else coeff = -1;
 
         //Получаем рандомный вектор для движения
-        setRandomVector(usedVectors);
+        if(!setRandomVector(usedVectors)) return false;
 
         //Получаем валидный шаг для движения
         setStep();
 
         int potentialXCoord = x_coord + coeff * vector[0] * step;
         int potentialYCoord = y_coord + coeff * vector[1] * step;
+        ChessFigure potentialKilled = null;
 
         for (ChessFigure figure: chessBoard.getPawnList()) {
             int differenceX = figure.getX_coord() - x_coord;
@@ -44,6 +45,7 @@ public class Elephant extends ChessFigure {
                         //если вражеская фигура стоит раньше то потенциально бьет её
                         potentialXCoord = figure.getX_coord();
                         potentialYCoord = figure.getY_coord();
+                        potentialKilled = figure;
                     }else{
                         //TODO until still on own place
                         //если союзная фигура стоит раньше
@@ -53,8 +55,11 @@ public class Elephant extends ChessFigure {
                     }
                 }
             }
-        }
 
+        }
+        x_coord = potentialXCoord;
+        y_coord = potentialYCoord;
+        chessBoard.getPawnList().remove(potentialKilled);
     }
 
     @Override
@@ -115,15 +120,16 @@ public class Elephant extends ChessFigure {
     }
 
     private int getVectorType(int x,int y){
-        if (x == 0 && y > 0) return 1;
+        int type = 0;
+        if (x == 0 && y > 0) type = 1;
 
-        if (x > 0 && y == 0 ) return 2;
+        if (x > 0 && y == 0 ) type = 2;
 
-        if (x == 0 && y < 0) return 3;
+        if (x == 0 && y < 0) type = 3;
 
-        if (x < 0 && y==0) return 4;
+        if (x < 0 && y==0) type = 4;
+
+        return type;
     }
-
-
 
 }
