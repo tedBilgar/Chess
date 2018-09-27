@@ -7,8 +7,8 @@ import com.company.types.Side;
 import java.util.List;
 
 public class Rook extends ChessFigure {
-    public Rook(Side side, ChessBoard chessBoard, Field location) {
-        super(side, chessBoard, location);
+    public Rook(Side side, ChessBoard chessBoard, int x_coord, int y_coord) {
+        super(side, chessBoard, x_coord, y_coord);
     }
 
     @Override
@@ -17,7 +17,7 @@ public class Rook extends ChessFigure {
     }
 
     @Override
-    void setStep(int bottomLine, int upperLine) {
+    void setStep() {
 
     }
 
@@ -25,5 +25,4 @@ public class Rook extends ChessFigure {
     boolean setRandomVector(List<Integer> usedVectors) {
         return false;
     }
-
 }
