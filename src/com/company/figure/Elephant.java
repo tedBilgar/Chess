@@ -31,27 +31,27 @@ public class Elephant extends ChessFigure {
 
         int potentialXCoord = x_coord + coeff * vector[0] * step;
         int potentialYCoord = y_coord + coeff * vector[1] * step;
+
         for (ChessFigure figure: chessBoard.getPawnList()) {
-            if (figure.getX_coord() < potentialXCoord || figure.getY_coord() < potentialYCoord){
+            int differenceX = figure.getX_coord() - x_coord;
+            int differenceY = figure.getY_coord() - y_coord;
 
-            }
-        }
-        for(int i=0;i<step;i++){
-            potentialXCoord = x_coord + coeff*vector[0];
-            potentialYCoord = y_coord + coeff*vector[1];
-
-            for (ChessFigure figure: chessBoard.getPawnList()) {
-                int differenceX = figure.getX_coord() - x_coord;
-                int differenceY = figure.getY_coord() - y_coord;
-
-                //данная фигура на пути у текущей фигуры или нет
-                if (getVectorType(differenceX,differenceY) == usedVectors.get(usedVectors.size() - 1){
-                    if (vector[0] * potentialXCoord > vector[0] * figure.getX_coord()
-                            || vector[1] * potentialYCoord > vector[1] * figure.getY_coord()){
-                        if ()
+            //данная фигура на пути у текущей фигуры или нет
+            if (getVectorType(differenceX,differenceY) == usedVectors.get(usedVectors.size() - 1)){
+                if (vector[0] * potentialXCoord > vector[0] * figure.getX_coord()
+                        || vector[1] * potentialYCoord > vector[1] * figure.getY_coord()){
+                    if (figure.side != this.side){
+                        //если вражеская фигура стоит раньше то потенциально бьет её
+                        potentialXCoord = figure.getX_coord();
+                        potentialYCoord = figure.getY_coord();
+                    }else{
+                        //TODO until still on own place
+                        //если союзная фигура стоит раньше
+                        //пока что стоит на месте своем
+                        potentialXCoord = figure.getX_coord()- vector[0] * 1;
+                        potentialYCoord = figure.getY_coord() - vector[1] * 1;
                     }
                 }
-
             }
         }
 
