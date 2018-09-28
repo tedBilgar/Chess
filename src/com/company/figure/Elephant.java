@@ -53,6 +53,7 @@ public class Elephant extends ChessFigure {
                         //если союзная фигура стоит раньше
                         //пока что стоит на месте своем
                         System.out.println("своя");
+                        System.out.println("фигура");
                         potentialXCoord = figure.getX_coord()- vector[0] * 1;
                         potentialYCoord = figure.getY_coord() - vector[1] * 1;
                     }
